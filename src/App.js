@@ -6,6 +6,8 @@ import { BookList } from "./BookList";
 function App() {
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(1);
+  const [search, setSearch] = useState("");
+  const [finalInput, setFinalInput] = useState("");
 
   useEffect(() => {
     fetch("https://example-data.draftbit.com/books?_limit=10")
@@ -16,9 +18,18 @@ function App() {
   return (
     <>
       <div className="relative">
-        <Nav />
+        <Nav
+          search={search}
+          setSearch={setSearch}
+          setFinalInput={setFinalInput}
+        />
         <Main books={books} selectedBook={selectedBook} />
-        <BookList books={books} setSelectedBook={setSelectedBook} />
+        <BookList
+          books={books}
+          setSelectedBook={setSelectedBook}
+          search={search}
+          finalInput={finalInput}
+        />
       </div>
     </>
   );
